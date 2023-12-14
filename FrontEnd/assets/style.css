@@ -47,11 +47,19 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+html{
+	height: 100%;
+	background-color: #FFFEF8;
+}
 body {
 	max-width: 1140px;
+	height: 100%;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 header {
 	display: flex;
@@ -89,6 +97,10 @@ nav ul {
 	align-items: center;
 	list-style-type: none;
 
+}
+nav img{
+	width: 22px;
+	font-weight: bold;
 }
 nav li {
 	padding: 0 10px;
@@ -192,4 +204,142 @@ footer nav ul {
 a {
 	text-decoration: none;
 	color: inherit;
+}
+.loginForm a {
+	text-align: center;
+}
+.forgotPassword {
+	text-decoration: underline;
+}
+
+.filters {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 0 200px;
+}
+.filters button {
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700;
+	color: #1D6154;
+	background-color: white;
+	height: 37px;
+	min-width: 100px;
+	margin : 2em auto ;
+	padding: 0 15px;
+	border: solid 1px #1D6154;
+	border-radius: 60px ;
+	cursor: pointer;
+}
+
+#selectedFilter {
+	color: white;
+	background-color: #1D6154;
+}
+
+.notDisplay {
+	display: none;
+}
+
+.loginErrorMessage {
+	background-color: rgba(255, 0, 0, 0.692);
+}
+
+.editBan {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 12px;
+	height: 59px;
+	padding: 20px 0;
+	background-color: black;
+	color: white;
+}
+
+#titleMenu {
+	display: flex;
+	justify-content: center;
+}
+
+#titleMenu img {
+	height: 16px;
+	margin-left: 20px;
+	margin-right: 10px;
+	padding-top: 5px;
+}
+
+#titleMenu a {
+	padding-top: 5px;
+}
+
+#titleModal {
+	font-size: 26px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modalWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 630px;
+	border-radius: 10px;
+	padding: 50px;
+	background-color: white;
+}
+
+.modalWrapper .gallery {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.modalWrapper figure {
+	width: 17%;
+}
+
+.modalWrapper figcaption {
+	display: none;
+}
+
+#close {
+	display: flex;
+	align-self: flex-end;
+	width: 12px;
+}
+
+#close:hover {
+	cursor: pointer;
+}
+
+.addPicture {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	font-size: 14px;
+	background-color: #1D6154;
+	margin: auto;
+	width: 50%;
+	height: 36px;
+	text-align: center;
+	border: none;
+	border-radius: 60px;
+}
+
+#separate {
+	border: 1px solid #B3B3B3;
+	margin: 25px auto;
+	width: 75%;
 }

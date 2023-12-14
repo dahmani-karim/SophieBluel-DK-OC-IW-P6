@@ -125,10 +125,14 @@ function editModePage() {
 
 editModePage();
 
-// Menu Management (modal)
+// Menu Management + navigation (modal)
 const modal = document.getElementById("modal");
 const editButton = document.querySelector(".editButton");
 const fermer = document.getElementById("close");
+const addPicture = document.querySelector(".addPicture");
+const backToStep1 = document.getElementById("goBack");
+const step1 = document.querySelector(".step1");
+const step2 = document.querySelector(".step2");
 
 editButton.addEventListener("click", function(e) {
     e.preventDefault();
@@ -138,6 +142,18 @@ editButton.addEventListener("click", function(e) {
 fermer.addEventListener("click", function(e) {
     e.preventDefault();
     modal.style = "display:none";
+});
+
+addPicture.addEventListener("click", function(e) {
+    e.preventDefault();
+    step1.style = "display:none";
+    step2.style = "display:flex";
+});
+
+backToStep1.addEventListener("click", function(e) {
+    e.preventDefault();
+    step2.style = "display:none";
+    step1.style = "display:flex";
 });
 
 // Ajouter du contenu

@@ -299,10 +299,23 @@ a {
 	background-color: white;
 }
 
-.step1 {
+.step1, .step2, .addingBox, #newWorkForm {
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: center;
+	align-content: center;
+	width: 100%;
+}
+
+#modalNavigation {
+	display: flex;
+	justify-content: space-between;
+}
+
+#newPic {
+	width: 76px;
+	height: 76px;
 }
 
 .modalWrapper .gallery {
@@ -325,12 +338,17 @@ a {
 	align-self: flex-end;
 	width: 12px;
 }
+#goBack {
+	display: flex;
+	align-self: flex-start;
+	width: 21px;
+}
 
-#close:hover {
+#close:hover, #goBack:hover {
 	cursor: pointer;
 }
 
-.addPicture {
+.addPicture, .submitPic {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -342,6 +360,7 @@ a {
 	border: none;
 	border-radius: 60px;
 	margin: 20px auto;
+	cursor: pointer;
 }
 
 #separate {

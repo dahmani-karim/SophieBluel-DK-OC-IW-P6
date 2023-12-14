@@ -27,7 +27,7 @@
 	<aside id="modal" class="modal" role="dialog" aria-labelledby="titleModal" style="display: none;">
 		<div class="modalWrapper">
 			<div class="step1" style="display: flex;">
-				<img src="./assets/icons/close.png" alt="close" id="close">
+				<img src="./assets/icons/close.png" alt="close" class="close">
 				<h3 id="titleModal">Galerie photo</h3>
 				<div class="gallery"></div>
 				<div id="separate"></div>
@@ -36,7 +36,7 @@
 			<div class="step2" style="display: none;">
 				<div id="modalNavigation">
 					<img src="./assets/icons/arrow-left.png" alt="goBack" id="goBack">
-					<img src="./assets/icons/close.png" alt="close" id="close">
+					<img src="./assets/icons/close.png" alt="close" class="close2">
 				</div>
 				<h3 id="titleModal">Ajout photo</h3>
 				<div class="addingBox">
@@ -44,14 +44,16 @@
 					<p>+ Ajouter photo</p>
 					<p>jpg, png : 4mo max</p>
 				</div>
-				<form id="newWorkForm" action="#" method="post">
-					<label for="workTitle">Titre</label>
-					<input type="text" name="workTitle" id="workTitle">
-					<label for="workCategory">Catégorie</label>
-					<input type="text" name="workCategory" id="workCategory">
-					<div id="separate"></div>
-					<input type="submit" value="Valider" class="submitPic">
-				</form>
+				<div id="newWorkForm">
+					<form id="newWorkForm" action="#" method="post">
+						<label for="workTitle">Titre</label>
+						<input type="text" name="workTitle" id="workTitle">
+						<label for="workCategory">Catégorie</label>
+						<input type="text" name="workCategory" id="workCategory">
+						<div id="separate"></div>
+						<input type="submit" value="Valider" class="submitPic">
+					</form>
+				</div>
 			</div>
 		</div>
 	</aside>

@@ -128,7 +128,8 @@ editModePage();
 // Menu Management + navigation (modal)
 const modal = document.getElementById("modal");
 const editButton = document.querySelector(".editButton");
-const fermer = document.getElementById("close");
+const fermer = document.querySelector(".close");
+const finish = document.querySelector(".close2");
 const addPicture = document.querySelector(".addPicture");
 const backToStep1 = document.getElementById("goBack");
 const step1 = document.querySelector(".step1");
@@ -141,6 +142,13 @@ editButton.addEventListener("click", function(e) {
 
 fermer.addEventListener("click", function(e) {
     e.preventDefault();
+    modal.style = "display:none";
+});
+
+finish.addEventListener("click", function(e) {
+    e.preventDefault();
+    step2.style = "display:none";
+    step1.style = "display:flex";
     modal.style = "display:none";
 });
 

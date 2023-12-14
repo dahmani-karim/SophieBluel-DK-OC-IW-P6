@@ -275,7 +275,7 @@ a {
 #titleModal {
 	font-size: 26px;
 	text-align: center;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 }
 
 .modal {
@@ -293,17 +293,23 @@ a {
 .modalWrapper {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
 	width: 630px;
 	border-radius: 10px;
-	padding: 50px;
+	padding: 20px;
 	background-color: white;
+}
+
+.step1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .modalWrapper .gallery {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	scale: 0.8;
 }
 
 .modalWrapper figure {
@@ -330,16 +336,16 @@ a {
 	color: white;
 	font-size: 14px;
 	background-color: #1D6154;
-	margin: auto;
 	width: 50%;
 	height: 36px;
 	text-align: center;
 	border: none;
 	border-radius: 60px;
+	margin: 20px auto;
 }
 
 #separate {
 	border: 1px solid #B3B3B3;
-	margin: 25px auto;
+	margin: auto;
 	width: 75%;
 }

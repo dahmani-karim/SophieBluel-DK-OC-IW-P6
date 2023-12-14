@@ -126,7 +126,7 @@ function editModePage() {
 editModePage();
 
 // Menu Management (modal)
-const modal = document.querySelector("aside");
+const modal = document.getElementById("modal");
 const editButton = document.querySelector(".editButton");
 const fermer = document.getElementById("close");
 

@@ -144,10 +144,9 @@ li:hover {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
-	grid-row-gap: 20px;
 }
 
-.gallery img {
+.home img, .photo {
 	width: 100%;
 }
 
@@ -269,7 +268,7 @@ a {
 	justify-content: center;
 }
 
-#titleMenu img {
+#blackPen {
 	height: 16px;
 	margin-left: 20px;
 	margin-right: 10px;
@@ -431,4 +430,11 @@ a {
 	align-items: center;
 	align-self: center;
 	border-radius: 3px;
+}
+
+.trash {
+	width: 17px;
+	position: relative;
+	bottom: 140px;
+	left: 85px;
 }

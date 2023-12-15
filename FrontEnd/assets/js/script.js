@@ -46,7 +46,7 @@ async function buildCategories() {
 }
 
 // Récupération des travaux et construction de la gallery
-async function buildGallery(id=0) {
+async function buildGallery(id=0, zone="home") {
         for (let i = 0; i < worksCounter; i++) {
             if( works[i].categoryId === id || id === 0) {
                 const newWork = document.createElement("figure");
@@ -56,7 +56,15 @@ async function buildGallery(id=0) {
                 newWork.appendChild(newIMG);
                 newWork.appendChild(newFigCaption);
                 newIMG.setAttribute("src",works[i].imageUrl);
+                newIMG.classList.add("photo");
                 newFigCaption.innerText = works[i].title;
+                if (zone === "modal") {
+                    const removeButton = document.createElement("img");
+                    removeButton.classList.add("trash");
+                    removeButton.id = "trash"+[i+1];
+                    removeButton.setAttribute("src", "./assets/icons/trash.png");
+                    newWork.appendChild(removeButton);
+                }
             }
         }
 }
@@ -64,7 +72,7 @@ async function buildGallery(id=0) {
 // Utilisation des fonctions d'initialisation
 resetGallery();
 buildCategories();
-buildGallery();
+buildGallery(0, "modal");
 
 // Filtrer
 filters.addEventListener("click", function (event) {
@@ -95,6 +103,7 @@ function editModePage() {
 
         // Création du bouton
         const editIconBlack = document.createElement("img");
+        editIconBlack.id = "blackPen";
         editIconBlack.setAttribute("src", "./assets/icons/penBlack.png");
         const manageButton = document.createElement("a");
         manageButton.classList.add("editButton");
@@ -134,10 +143,14 @@ const addPicture = document.querySelector(".addPicture");
 const backArrow = document.getElementById("goBack");
 const step1 = document.querySelector(".step1");
 const step2 = document.querySelector(".step2");
+//let visibilityStatut = null;
 
 function openModal(e) {
     e.preventDefault();
     modal.style.display = "flex";
+    // visibilityStatut = document.getElementById("modal");
+    // console.log(visibilityStatut);
+    // visibilityStatut.addEventListener("click", closeModal);
 }
 
 function closeModal(e) {

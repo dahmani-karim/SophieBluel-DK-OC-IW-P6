@@ -134,13 +134,10 @@ const addPicture = document.querySelector(".addPicture");
 const backArrow = document.getElementById("goBack");
 const step1 = document.querySelector(".step1");
 const step2 = document.querySelector(".step2");
-const visibilityModalStatut = null;
 
 function openModal(e) {
     e.preventDefault();
     modal.style.display = "flex";
-    visibilityModalStatut = modal;
-    visibilityModalStatut.addEventListener("click", closeModal);
 }
 
 function closeModal(e) {

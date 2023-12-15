@@ -109,16 +109,16 @@ function editModePage() {
         loginButton.setAttribute("href","#");
 
         // Masquer les filtres
-        filters.style = "display:none";
+        filters.classList.add("visibilityHidden");
 
         // LOGOUT - clean sessionStorage (FAIRE UNE FONCTION POUR LA REUTILISER DANS LE IF RETURN)
         loginButton.addEventListener("click", function() {
             window.sessionStorage.removeItem("token");
-            filters.style.display= "flex";
+            filters.classList.remove("visibilityHidden");
             loginButton.innerText ="login";
             loginButton.setAttribute("href","login.html");
-            manageButton.style = "display:none";
-            editModeBan.style = "display:none";
+            manageButton.classList.add("visibilityHidden");
+            editModeBan.style.display = "none";
         });
     }
 };
@@ -128,43 +128,46 @@ editModePage();
 // Menu Management + navigation (modal)
 const modal = document.getElementById("modal");
 const editButton = document.querySelector(".editButton");
-const fermer = document.querySelector(".close");
-const finish = document.querySelector(".close2");
+const closeButton = document.querySelector(".close");
+const closeButton2 = document.querySelector(".close2");
 const addPicture = document.querySelector(".addPicture");
-const backToStep1 = document.getElementById("goBack");
+const backArrow = document.getElementById("goBack");
 const step1 = document.querySelector(".step1");
 const step2 = document.querySelector(".step2");
+const visibilityModalStatut = null;
 
-editButton.addEventListener("click", function(e) {
+function openModal(e) {
     e.preventDefault();
-    modal.style = "display:flex";
-});
+    modal.style.display = "flex";
+    visibilityModalStatut = modal;
+    visibilityModalStatut.addEventListener("click", closeModal);
+}
 
-fermer.addEventListener("click", function(e) {
+function closeModal(e) {
     e.preventDefault();
-    modal.style = "display:none";
-});
+    step2.style.display = "none";
+    step1.style.display = "flex";
+    modal.style.display = "none";
+}
 
-finish.addEventListener("click", function(e) {
+function goToStep2(e) {
     e.preventDefault();
-    step2.style = "display:none";
-    step1.style = "display:flex";
-    modal.style = "display:none";
-});
+    step1.style.display = "none";
+    step2.style.display = "flex";
+}
 
-addPicture.addEventListener("click", function(e) {
+function backToStep1(e) {
     e.preventDefault();
-    step1.style = "display:none";
-    step2.style = "display:flex";
-});
+    step2.style.display = "none";
+    step1.style.display = "flex";
+}
 
-backToStep1.addEventListener("click", function(e) {
-    e.preventDefault();
-    step2.style = "display:none";
-    step1.style = "display:flex";
-});
+editButton.addEventListener("click", openModal);
+closeButton.addEventListener("click", closeModal);
+closeButton2.addEventListener("click", closeModal);
+addPicture.addEventListener("click", goToStep2);
+backArrow.addEventListener("click", backToStep1);
 
 // Ajouter du contenu
 
 // Supprimer du contenu
-

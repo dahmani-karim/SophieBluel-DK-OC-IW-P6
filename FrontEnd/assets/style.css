@@ -133,10 +133,12 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -148,6 +150,7 @@ li:hover {
 .gallery img {
 	width: 100%;
 }
+
 #contact {
 	width: 50%;
 	margin: auto;
@@ -205,18 +208,27 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
+
+/* LOGIN */
 .loginForm a {
 	text-align: center;
 }
+
 .forgotPassword {
 	text-decoration: underline;
 }
 
+.loginErrorMessage {
+	background-color: rgba(255, 0, 0, 0.692);
+}
+
+/* FILTERS */
 .filters {
 	display: flex;
 	justify-content: space-evenly;
 	margin: 0 200px;
 }
+
 .filters button {
 	font-family: 'Syne';
 	font-size: 16px;
@@ -237,12 +249,8 @@ a {
 	background-color: #1D6154;
 }
 
-.notDisplay {
-	display: none;
-}
-
-.loginErrorMessage {
-	background-color: rgba(255, 0, 0, 0.692);
+.visibilityHidden {
+	visibility: hidden;
 }
 
 .editBan {
@@ -272,10 +280,10 @@ a {
 	padding-top: 5px;
 }
 
+/* MODAL */
 #titleModal {
 	font-size: 26px;
 	text-align: center;
-	/* margin-bottom: 20px; */
 }
 
 .modal {
@@ -291,15 +299,18 @@ a {
 }
 
 .modalWrapper {
+	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	width: 630px;
+	max-width: calc(100% - 200px);
+	max-height: calc(100% - 100px);
 	border-radius: 10px;
 	padding: 20px;
 	background-color: white;
 }
 
-.step1, .step2, .addingBox, #newWorkForm {
+.step1, .step2, .addingBox, #uploadForm, #newWorkForm {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -310,6 +321,10 @@ a {
 
 .step2 {
 	gap: 20px;
+}
+
+#workCategory {
+	margin-bottom: 40px;
 }
 
 #modalNavigation {
@@ -342,6 +357,8 @@ a {
 	align-self: flex-end;
 	width: 12px;
 }
+
+/* MODAL NAVIGATION */
 #goBack {
 	display: flex;
 	align-self: flex-start;
@@ -352,7 +369,11 @@ a {
 	cursor: pointer;
 }
 
-.addPicture, .submitPic {
+#uploadInfo {
+	margin-top: 10px;
+}
+
+.addPicture {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -364,6 +385,36 @@ a {
 	border: none;
 	border-radius: 60px;
 	margin: 20px auto;
+	cursor: pointer;
+}
+
+#unvalidForm {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	font-size: 14px;
+	background-color: #A7A7A7;
+	width: 50%;
+	height: 36px;
+	text-align: center;
+	border: none;
+	border-radius: 60px;
+	margin: 20px auto;
+	cursor: pointer;
+}
+
+#submitPic {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #306685;
+	font-size: 14px;
+	background-color: #CBD6DC;
+	width: 173px;
+	height: 36px;
+	text-align: center;
+	border: none;
+	border-radius: 60px;
+	margin: 0px auto;
 	cursor: pointer;
 }
 
@@ -379,4 +430,5 @@ a {
 	height: 169px;
 	align-items: center;
 	align-self: center;
+	border-radius: 3px;
 }

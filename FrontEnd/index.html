@@ -41,17 +41,17 @@
 				<h3 id="titleModal">Ajout photo</h3>
 				<div class="addingBox">
 					<img src="./assets/icons/picture.png" alt="picture" id="newPic">
-					<p>+ Ajouter photo</p>
-					<p>jpg, png : 4mo max</p>
+					<input type="submit" value="+ Ajouter photo" id="submitPic">
+					<span id="uploadInfo">jpg, png : 4mo max</span>
 				</div>
-				<div id="newWorkForm">
-					<form id="newWorkForm" action="#" method="post">
+				<div id="uploadForm">
+					<form id="newWorkForm" id="newWorkForm" action="#" method="post">
 						<label for="workTitle">Titre</label>
 						<input type="text" name="workTitle" id="workTitle">
 						<label for="workCategory">Catégorie</label>
 						<input type="text" name="workCategory" id="workCategory">
 						<div id="separate"></div>
-						<input type="submit" value="Valider" class="submitPic">
+						<input type="submit" value="Valider" id="unvalidForm">
 					</form>
 				</div>
 			</div>

@@ -179,8 +179,5 @@ addPicture.addEventListener("click", goToStep2);
 backArrow.addEventListener("click", backToStep1);
 
 // Ajouter du contenu
-function chooseFile() {
-    
-}
 
 // Supprimer du contenu

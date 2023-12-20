@@ -28,7 +28,7 @@
 		<div class="modalWrapper">
 			<div class="step1" style="display: flex;">
 				<img src="./assets/icons/close.png" alt="close" class="close">
-				<h3 id="titleModal">Galerie photo</h3>
+				<h3 class="titleModal">Galerie photo</h3>
 				<div class="gallery"></div>
 				<div id="separate"></div>
 				<button class="addPicture">Ajouter une photo</button>
@@ -38,10 +38,13 @@
 					<img src="./assets/icons/arrow-left.png" alt="goBack" id="goBack">
 					<img src="./assets/icons/close.png" alt="close" class="close2">
 				</div>
-				<h3 id="titleModal">Ajout photo</h3>
+				<h3 class="titleModal">Ajout photo</h3>
 				<div class="addingBox">
 					<img src="./assets/icons/picture.png" alt="picture" id="newPic">
-					<input type="submit" value="+ Ajouter photo" id="submitPic">
+					<label for="submitPic" class="customInput">
+						+ Ajouter photo
+						<input type="file" id="submitPic" name="submitPic" title="cliquer pour sélectionner une image" accept=".jpg, .jpeg, .png">
+					</label>
 					<span id="uploadInfo">jpg, png : 4mo max</span>
 				</div>
 				<div id="uploadForm">

@@ -280,7 +280,7 @@ a {
 }
 
 /* MODAL */
-#titleModal {
+.titleModal {
 	font-size: 26px;
 	text-align: center;
 }
@@ -340,7 +340,7 @@ a {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	scale: 0.8;
+	transform: scale(0.8);
 }
 
 .modalWrapper figure {
@@ -399,10 +399,13 @@ a {
 	border: none;
 	border-radius: 60px;
 	margin: 20px auto;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
-#submitPic {
+.customInput {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #306685;
@@ -415,6 +418,10 @@ a {
 	border-radius: 60px;
 	margin: 0px auto;
 	cursor: pointer;
+}
+
+input[type="file"] {
+	display: none;
 }
 
 #separate {

@@ -218,28 +218,45 @@ document.getElementById("workCategory").onchange = evt => {
     }
 }
 
+const token = window.sessionStorage.token;
+let newWorkLocal = {};
 let newWork = {};
 
 function addWork() {
-    const id = document.getElementById("workCategory").value;
-    newWork = {
-        "id": works.length+1,
+    const id = Number(document.getElementById("workCategory").value);
+
+    newWorkLocal = {
+        "id": Number(works.length+1),
         "title": document.getElementById("workTitle").value,
         "imageUrl": previewUpload.src,
-        "categoryId": document.getElementById("workCategory").value,
+        "categoryId": id,
         "userId": 1,
         "category": {
             "id": id,
             "name": document.getElementById("workCategory").options[document.getElementById("workCategory").selectedIndex].text
         }
     };
+    works.push(newWorkLocal); // pour sauvegarde locale
 
-    console.log(newWork);
+    newWork = {        
+        "image": previewUpload.src,
+        "title": document.getElementById("workTitle").value,
+        "category": id,
+    }
 
-    // works.push(newWork); // pour sauvegarde locale
-    // console.log(works[12]);
-    // publish(); // POST pour mise à jour API
+    const newWorkData = JSON.stringify(newWork);
 
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "Content-Type":"multipart/form-data",
+            "accept":"application/json",
+            "Authorization":token
+        },
+        body: newWorkData
+    });
+
+    newWorkLocal = {};
     newWork = {};
     previewUpload.src = "#";
 
@@ -256,9 +273,8 @@ function addWork() {
     step1.style.display = "flex";
     modal.style.display = "none";
 
-    buildGallery();
+    console.table(works);
 
-    console.log(newWork);
 };
 
 document.getElementById("uploadValidationForm").addEventListener("click", addWork);

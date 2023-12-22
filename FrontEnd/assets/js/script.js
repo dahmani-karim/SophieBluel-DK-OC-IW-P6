@@ -24,7 +24,7 @@ function resetGallery() {
 }
 
 // Récupération des noms des catégories et construction des boutons de filtres
-async function buildCategories() {
+async function buildCategories(zone="home") {
         // ajout du bouton TOUS
         const allCatFilter = document.createElement("button");
         allCatFilter.setAttribute("type","button");
@@ -143,14 +143,21 @@ const addPicture = document.querySelector(".addPicture");
 const backArrow = document.getElementById("goBack");
 const step1 = document.querySelector(".step1");
 const step2 = document.querySelector(".step2");
-//let visibilityStatut = null;
+
+function createCatList() {
+    for (let i = 0; i < categoriesCounter; i++) {
+        const optionList = document.getElementById("workCategory");
+        const option = document.createElement("option");
+        option.setAttribute("value",categories[i].id);
+        option.innerText = categories[i].name;
+        optionList.appendChild(option);
+    }
+}
+createCatList();
 
 function openModal(e) {
     e.preventDefault();
     modal.style.display = "flex";
-    // visibilityStatut = document.getElementById("modal");
-    // console.log(visibilityStatut);
-    // visibilityStatut.addEventListener("click", closeModal);
 }
 
 function closeModal(e) {
@@ -178,6 +185,79 @@ closeButton2.addEventListener("click", closeModal);
 addPicture.addEventListener("click", goToStep2);
 backArrow.addEventListener("click", backToStep1);
 
-// Ajouter du contenu
+/// Ajouter du contenu
+//preview new upload image in form
+let newImgUpload = document.getElementById("submitPic");
 
+newImgUpload.onchange = evt => {
+    const [file] = newImgUpload.files;
+    if (file) {
+        previewUpload.src = URL.createObjectURL(file);
+        document.getElementById("newPic").style.display = "none";
+        document.querySelector(".customInput").style.display = "none";
+        document.getElementById("uploadInfo").style.display = "none";
+        document.getElementById("previewUpload").style.display = "flex";
+    }
+}
+
+//authorize submit only when form is not empty
+document.getElementById("workCategory").onchange = evt => {
+    const title = document.getElementById("workTitle").value;
+    const category = document.getElementById("workCategory").value;
+    const submitButton = document.getElementById("uploadValidationForm");
+
+    console.log(title)
+    console.log(category)
+
+    if(title && category>0) {
+        submitButton.removeAttribute("id");
+        submitButton.classList.add("validPicture");
+    }
+    else if (category<1 || !title) {
+        alert("Veuillez renseigner les champs du formulaire");
+    }
+}
+
+let newWork = {};
+
+function addWork() {
+    const id = document.getElementById("workCategory").value;
+    newWork = {
+        "id": works.length+1,
+        "title": document.getElementById("workTitle").value,
+        "imageUrl": previewUpload.src,
+        "categoryId": document.getElementById("workCategory").value,
+        "userId": 1,
+        "category": {
+            "id": id,
+            "name": document.getElementById("workCategory").options[document.getElementById("workCategory").selectedIndex].text
+        }
+    };
+
+    console.log(newWork);
+
+    // works.push(newWork); pour sauvegarde locale
+    // POST pour mise à jour API
+    alert("work added")
+
+    newWork = {};
+    previewUpload.src = "#";
+
+    document.getElementById("newPic").removeAttribute("style");
+    document.querySelector(".customInput").removeAttribute("style");
+    document.getElementById("uploadInfo").removeAttribute("style");
+    document.getElementById("previewUpload").style.display ="none";
+    document.querySelector(".validPicture").setAttribute("id", "uploadValidationForm");
+    document.querySelector(".validPicture").classList.remove("validPicture");
+    document.getElementById("workTitle").value = "";
+    document.getElementById("workCategory").value = "";
+
+    step2.style.display = "none";
+    step1.style.display = "flex";
+    modal.style.display = "none";
+
+    console.log(newWork);
+};
+
+document.getElementById("uploadValidationForm").addEventListener("click", addWork);
 // Supprimer du contenu

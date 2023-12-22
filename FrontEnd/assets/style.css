@@ -336,19 +336,15 @@ a {
 	height: 76px;
 }
 
-.modalWrapper .gallery {
+.galleryModal {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	transform: scale(0.8);
 }
 
-.modalWrapper figure {
+.galleryModal figure {
 	width: 17%;
-}
-
-.modalWrapper figcaption {
-	display: none;
 }
 
 .close, .close2 {
@@ -444,6 +440,7 @@ input[type="file"] {
 	position: relative;
 	bottom: 140px;
 	left: 85px;
+	cursor: pointer;
 }
 
 #previewUpload {

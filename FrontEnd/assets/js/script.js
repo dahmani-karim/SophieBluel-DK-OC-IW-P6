@@ -4,7 +4,8 @@ let works = [];
 let categoriesCounter = 0;
 let worksCounter = 0;
 const filters = document.querySelector(".filters");
-const gallery = document.querySelector(".gallery");
+const gallery = document.getElementById("gallery");
+const galleryModal = document.getElementById("galleryModal");
 const ban = document.querySelector("header");
 const loginButton = document.querySelector("[href='./login.html']");
 
@@ -18,9 +19,8 @@ works = await responseWorks.json();
 worksCounter = works.length;
 
 // RESET GALLERY
-function resetGallery() {
-    const cleaner = document.querySelector(".gallery");
-    cleaner.innerHTML = "";
+function resetGallery(zone) {
+    zone.innerHTML = "";
 }
 
 // Récupération des noms des catégories et construction des boutons de filtres
@@ -46,33 +46,39 @@ async function buildCategories(zone="home") {
 }
 
 // Récupération des travaux et construction de la gallery
-async function buildGallery(id=0, zone="home") {
+async function buildGallery(id, zone) {
         for (let i = 0; i < worksCounter; i++) {
             if( works[i].categoryId === id || id === 0) {
                 const newWork = document.createElement("figure");
                 const newIMG = document.createElement("img");
-                const newFigCaption = document.createElement("figcaption");
-                gallery.appendChild(newWork);
                 newWork.appendChild(newIMG);
-                newWork.appendChild(newFigCaption);
                 newIMG.setAttribute("src",works[i].imageUrl);
                 newIMG.classList.add("photo");
-                newFigCaption.innerText = works[i].title;
                 if (zone === "modal") {
+                    galleryModal.appendChild(newWork);
                     const removeButton = document.createElement("img");
                     removeButton.classList.add("trash");
                     removeButton.id = "trash"+[i+1];
                     removeButton.setAttribute("src", "./assets/icons/trash.png");
                     newWork.appendChild(removeButton);
+                    removeButton.addEventListener("click", function() {
+                        deleteWork(works[i].id,works[i].id);
+                    });
+                }
+                else {
+                    gallery.appendChild(newWork);
+                    const newFigCaption = document.createElement("figcaption");
+                    newWork.appendChild(newFigCaption);
+                    newFigCaption.innerText = works[i].title;
                 }
             }
         }
 }
 
 // Utilisation des fonctions d'initialisation
-resetGallery();
+resetGallery(gallery);
 buildCategories();
-buildGallery(0, "modal");
+buildGallery(0, "home");
 
 // Filtrer
 filters.addEventListener("click", function (event) {
@@ -157,6 +163,8 @@ createCatList();
 
 function openModal(e) {
     e.preventDefault();
+    resetGallery(galleryModal);
+    buildGallery(0, "modal");
     modal.style.display = "flex";
 }
 
@@ -179,9 +187,8 @@ function backToStep1(e) {
     step1.style.display = "flex";
 }
 
-console.table(works);
-
 const token = window.sessionStorage.token;
+console.log(token)
 if (token) {
     editButton.addEventListener("click", openModal);
 }
@@ -212,9 +219,6 @@ document.getElementById("workCategory").onchange = evt => {
     const category = document.getElementById("workCategory").value;
     const submitButton = document.getElementById("uploadValidationForm");
 
-    console.log(title)
-    console.log(category)
-
     if(title && category>0) {
         submitButton.removeAttribute("id");
         submitButton.classList.add("validPicture");
@@ -226,7 +230,7 @@ document.getElementById("workCategory").onchange = evt => {
 
 let newWorkLocal = {};
 let newWork = {};
-/*-
+
 function addWork() {
     const id = Number(document.getElementById("workCategory").value);
 
@@ -241,9 +245,7 @@ function addWork() {
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
-            "Content-Type":"multipart/form-data",
-            "accept":"application/json",
-            "Authorization":token
+            "Authorization":`Bearer ${token}`
         },
         body: newWorkData
     });
@@ -263,7 +265,7 @@ function addWork() {
 
     newWorkLocal = {};
     newWork = {};
-    //previewUpload.src = "#";
+    previewUpload.src = "#";
 
     document.getElementById("newPic").removeAttribute("style");
     document.querySelector(".customInput").removeAttribute("style");
@@ -279,10 +281,19 @@ function addWork() {
     modal.style.display = "none";
 
     console.table(works);
-
 };
 
 document.getElementById("uploadValidationForm").addEventListener("click", addWork);
--*/
+
 // Supprimer du contenu
+function deleteWork(id, token) {
+    fetch("http://localhost:5678/api/works/"+id, {
+        method: "DELETE",
+        headers: {
+            "accept":"*/*",
+            "Authorization":`Bearer ${token}`
+        },
+    });
+}
+
 console.table(works);

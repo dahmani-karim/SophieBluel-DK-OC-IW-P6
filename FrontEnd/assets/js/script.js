@@ -62,7 +62,7 @@ async function buildGallery(id, zone) {
                     removeButton.setAttribute("src", "./assets/icons/trash.png");
                     newWork.appendChild(removeButton);
                     removeButton.addEventListener("click", function() {
-                        deleteWork(works[i].id,works[i].id);
+                        deleteWork(works[i].id, window.sessionStorage.token);
                     });
                 }
                 else {
@@ -187,9 +187,7 @@ function backToStep1(e) {
     step1.style.display = "flex";
 }
 
-const token = window.sessionStorage.token;
-console.log(token)
-if (token) {
+if (window.sessionStorage.token) {
     editButton.addEventListener("click", openModal);
 }
 
@@ -235,19 +233,19 @@ function addWork() {
     const id = Number(document.getElementById("workCategory").value);
 
     newWork = {        
-        "image": previewUpload.src,
+        "image": newImgUpload.files[0],
         "title": document.getElementById("workTitle").value,
         "category": id,
     }
-
+console.log(newWork)
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
-            "Authorization":`Bearer ${token}`
+            "Authorization":`Bearer ${window.sessionStorage.token}`
         },
         body: JSON.stringify(newWork),
     });
-
+/*-
     newWorkLocal = {
         "id": Number(works.length+1),
         "title": document.getElementById("workTitle").value,
@@ -260,7 +258,7 @@ function addWork() {
         }
     };
     works.push(newWorkLocal); // pour sauvegarde locale
-
+-*/
     newWorkLocal = {};
     newWork = {};
     previewUpload.src = "#";
@@ -285,13 +283,11 @@ document.getElementById("uploadValidationForm").addEventListener("click", addWor
 
 // Supprimer du contenu
 function deleteWork(id, token) {
-    fetch("http://localhost:5678/api/works/"+id, {
+    fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
-            "accept":"*/*",
-            "Authorization":`Bearer ${token}`
+            "Content-Type": "application/json",
+            "Authorization":`Bearer ${window.sessionStorage.token}`
         },
     });
 }
-
-console.table(works);

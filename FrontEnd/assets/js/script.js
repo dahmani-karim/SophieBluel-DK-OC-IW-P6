@@ -240,14 +240,12 @@ function addWork() {
         "category": id,
     }
 
-    const newWorkData = JSON.stringify(newWork);
-
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
             "Authorization":`Bearer ${token}`
         },
-        body: newWorkData
+        body: JSON.stringify(newWork),
     });
 
     newWorkLocal = {

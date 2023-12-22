@@ -179,7 +179,13 @@ function backToStep1(e) {
     step1.style.display = "flex";
 }
 
-editButton.addEventListener("click", openModal);
+console.table(works);
+
+const token = window.sessionStorage.token;
+if (token) {
+    editButton.addEventListener("click", openModal);
+}
+
 closeButton.addEventListener("click", closeModal);
 closeButton2.addEventListener("click", closeModal);
 addPicture.addEventListener("click", goToStep2);
@@ -218,25 +224,11 @@ document.getElementById("workCategory").onchange = evt => {
     }
 }
 
-const token = window.sessionStorage.token;
 let newWorkLocal = {};
 let newWork = {};
-
+/*-
 function addWork() {
     const id = Number(document.getElementById("workCategory").value);
-
-    newWorkLocal = {
-        "id": Number(works.length+1),
-        "title": document.getElementById("workTitle").value,
-        "imageUrl": previewUpload.src,
-        "categoryId": id,
-        "userId": 1,
-        "category": {
-            "id": id,
-            "name": document.getElementById("workCategory").options[document.getElementById("workCategory").selectedIndex].text
-        }
-    };
-    works.push(newWorkLocal); // pour sauvegarde locale
 
     newWork = {        
         "image": previewUpload.src,
@@ -256,9 +248,22 @@ function addWork() {
         body: newWorkData
     });
 
+    newWorkLocal = {
+        "id": Number(works.length+1),
+        "title": document.getElementById("workTitle").value,
+        "imageUrl": previewUpload.src,
+        "categoryId": id,
+        "userId": 1,
+        "category": {
+            "id": id,
+            "name": document.getElementById("workCategory").options[document.getElementById("workCategory").selectedIndex].text
+        }
+    };
+    works.push(newWorkLocal); // pour sauvegarde locale
+
     newWorkLocal = {};
     newWork = {};
-    previewUpload.src = "#";
+    //previewUpload.src = "#";
 
     document.getElementById("newPic").removeAttribute("style");
     document.querySelector(".customInput").removeAttribute("style");
@@ -278,5 +283,6 @@ function addWork() {
 };
 
 document.getElementById("uploadValidationForm").addEventListener("click", addWork);
-
+-*/
 // Supprimer du contenu
+console.table(works);

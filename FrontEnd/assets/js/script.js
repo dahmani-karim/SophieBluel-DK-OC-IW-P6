@@ -226,42 +226,23 @@ document.getElementById("workCategory").onchange = evt => {
     }
 }
 
-let newWorkLocal = {};
-let newWork = {};
-
 function addWork() {
     const id = Number(document.getElementById("workCategory").value);
 
-    newWork = {        
-        "image": newImgUpload.files[0],
-        "title": document.getElementById("workTitle").value,
-        "category": id,
-    }
+    const formData = new FormData();
+    formData.append("image", newImgUpload.files[0]);
+    formData.append("title", document.getElementById("workTitle").value);
+    formData.append("category", id);
 
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
             "Authorization":`Bearer ${window.sessionStorage.token}`
         },
-        body: JSON.stringify(newWork),
+        body: formData,
     });
-/*-
-    newWorkLocal = {
-        "id": Number(works.length+1),
-        "title": document.getElementById("workTitle").value,
-        "imageUrl": previewUpload.src,
-        "categoryId": id,
-        "userId": 1,
-        "category": {
-            "id": id,
-            "name": document.getElementById("workCategory").options[document.getElementById("workCategory").selectedIndex].text
-        }
-    };
-    works.push(newWorkLocal); // pour sauvegarde locale
--*/
-    newWorkLocal = {};
-    newWork = {};
-    previewUpload.src = "#";
+
+    previewUpload.src = "";
 
     document.getElementById("newPic").removeAttribute("style");
     document.querySelector(".customInput").removeAttribute("style");

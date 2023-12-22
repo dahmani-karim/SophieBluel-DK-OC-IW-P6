@@ -237,7 +237,7 @@ function addWork() {
         "title": document.getElementById("workTitle").value,
         "category": id,
     }
-console.log(newWork)
+
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
@@ -276,7 +276,6 @@ console.log(newWork)
     step1.style.display = "flex";
     modal.style.display = "none";
 
-    console.table(works);
 };
 
 document.getElementById("uploadValidationForm").addEventListener("click", addWork);

@@ -236,9 +236,9 @@ function addWork() {
 
     console.log(newWork);
 
-    // works.push(newWork); pour sauvegarde locale
-    // POST pour mise à jour API
-    alert("work added")
+    // works.push(newWork); // pour sauvegarde locale
+    // console.log(works[12]);
+    // publish(); // POST pour mise à jour API
 
     newWork = {};
     previewUpload.src = "#";
@@ -256,8 +256,11 @@ function addWork() {
     step1.style.display = "flex";
     modal.style.display = "none";
 
+    buildGallery();
+
     console.log(newWork);
 };
 
 document.getElementById("uploadValidationForm").addEventListener("click", addWork);
+
 // Supprimer du contenu

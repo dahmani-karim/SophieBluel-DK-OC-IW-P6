@@ -1,4 +1,4 @@
-// Déclaration des variables (stockage, comptage, ciblage)
+/// VARIABLES
 let categories = [];
 let works = [];
 let categoriesCounter = 0;
@@ -8,21 +8,30 @@ const gallery = document.getElementById("gallery");
 const galleryModal = document.getElementById("galleryModal");
 const ban = document.querySelector("header");
 const loginButton = document.querySelector("[href='./login.html']");
+const token = window.sessionStorage.token;
+const modal = document.getElementById("modal");
+const closeButton = document.querySelector(".close");
+const closeButton2 = document.querySelector(".close2");
+const addPicture = document.querySelector(".addPicture");
+const backArrow = document.getElementById("goBack");
+const step1 = document.querySelector(".step1");
+const step2 = document.querySelector(".step2");
 
-// Connexion à l'API
+/// CONNEXION API
+// Fetch catégories
 const responseCategories = await fetch("http://localhost:5678/api/categories");
 categories = await responseCategories.json();
 categoriesCounter = categories.length;
-
+// Fetch travaux
 const responseWorks = await fetch("http://localhost:5678/api/works");
 works = await responseWorks.json();
 worksCounter = works.length;
 
-// RESET GALLERY
+/// FONCTIONS
+// Reset gallery
 function resetGallery(zone) {
     zone.innerHTML = "";
 }
-
 // Récupération des noms des catégories et construction des boutons de filtres
 async function buildCategories(zone="home") {
         // ajout du bouton TOUS
@@ -44,7 +53,6 @@ async function buildCategories(zone="home") {
             newFilter.innerText = categories[i].name;
         }
 }
-
 // Récupération des travaux et construction de la gallery
 async function buildGallery(id, zone) {
         for (let i = 0; i < worksCounter; i++) {
@@ -62,7 +70,7 @@ async function buildGallery(id, zone) {
                     removeButton.setAttribute("src", "./assets/icons/trash.png");
                     newWork.appendChild(removeButton);
                     removeButton.addEventListener("click", function() {
-                        deleteWork(works[i].id, window.sessionStorage.token);
+                        deleteWork(works[i].id, token);
                     });
                 }
                 else {
@@ -74,12 +82,6 @@ async function buildGallery(id, zone) {
             }
         }
 }
-
-// Utilisation des fonctions d'initialisation
-resetGallery(gallery);
-buildCategories();
-buildGallery(0, "home");
-
 // Filtrer
 filters.addEventListener("click", function (event) {
     const activeFilter = document.getElementById("selectedFilter");
@@ -91,9 +93,14 @@ filters.addEventListener("click", function (event) {
     };
 });
 
+/// Utilisation des fonctions d'initialisation
+resetGallery(gallery);
+buildCategories();
+buildGallery(0, "home");
+
 // MODE ÉDITION
 function editModePage() {
-    if (!window.sessionStorage.token) return;
+    if (!token) return;
     else {
         // Création de la bannière
         const editModeBan = document.createElement("banner");
@@ -118,6 +125,7 @@ function editModePage() {
         const projectTitle = document.getElementById("titleMenu");
         projectTitle.appendChild(editIconBlack);
         projectTitle.appendChild(manageButton);
+        manageButton.addEventListener("click", openModal);
 
         // Modification du bouton de LOGIN en LOGOUT
         loginButton.innerText ="logout";
@@ -141,15 +149,6 @@ function editModePage() {
 editModePage();
 
 // Menu Management + navigation (modal)
-const modal = document.getElementById("modal");
-const editButton = document.querySelector(".editButton");
-const closeButton = document.querySelector(".close");
-const closeButton2 = document.querySelector(".close2");
-const addPicture = document.querySelector(".addPicture");
-const backArrow = document.getElementById("goBack");
-const step1 = document.querySelector(".step1");
-const step2 = document.querySelector(".step2");
-
 function createCatList() {
     for (let i = 0; i < categoriesCounter; i++) {
         const optionList = document.getElementById("workCategory");
@@ -185,10 +184,6 @@ function backToStep1(e) {
     e.preventDefault();
     step2.style.display = "none";
     step1.style.display = "flex";
-}
-
-if (window.sessionStorage.token) {
-    editButton.addEventListener("click", openModal);
 }
 
 closeButton.addEventListener("click", closeModal);
@@ -237,13 +232,14 @@ function addWork() {
     fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
-            "Authorization":`Bearer ${window.sessionStorage.token}`
+            "Authorization":`Bearer ${token}`
         },
         body: formData,
     });
 
     previewUpload.src = "";
 
+    // reset form
     document.getElementById("newPic").removeAttribute("style");
     document.querySelector(".customInput").removeAttribute("style");
     document.getElementById("uploadInfo").removeAttribute("style");
@@ -267,7 +263,7 @@ function deleteWork(id, token) {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            "Authorization":`Bearer ${window.sessionStorage.token}`
+            "Authorization":`Bearer ${token}`
         },
     });
 }

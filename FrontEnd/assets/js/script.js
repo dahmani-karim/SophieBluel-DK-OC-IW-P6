@@ -92,13 +92,7 @@ filters.addEventListener("click", function (event) {
         buildGallery(Number(event.target.getAttribute("data-categoryId")));       
     };
 });
-
-/// Utilisation des fonctions d'initialisation
-resetGallery(gallery);
-buildCategories();
-buildGallery(0, "home");
-
-// MODE ÉDITION
+// Mode édition
 function editModePage() {
     if (!token) return;
     else {
@@ -146,9 +140,16 @@ function editModePage() {
     }
 };
 
+/// UTILISATION DES FONCTIONS
+// Initialisation
+resetGallery(gallery);
+buildCategories();
+buildGallery(0, "home");
+// Activation du mode édition
 editModePage();
 
-// Menu Management + navigation (modal)
+/// MODAL
+// Ouverture, Fermeture, Navigation et Formulaire
 function createCatList() {
     for (let i = 0; i < categoriesCounter; i++) {
         const optionList = document.getElementById("workCategory");
@@ -191,7 +192,6 @@ closeButton2.addEventListener("click", closeModal);
 addPicture.addEventListener("click", goToStep2);
 backArrow.addEventListener("click", backToStep1);
 
-/// Ajouter du contenu
 //preview new upload image in form
 let newImgUpload = document.getElementById("submitPic");
 
@@ -221,6 +221,7 @@ document.getElementById("workCategory").onchange = evt => {
     }
 }
 
+// Ajouter du contenu
 function addWork() {
     const id = Number(document.getElementById("workCategory").value);
 

@@ -187,6 +187,27 @@ function backToStep1(e) {
     step1.style.display = "flex";
 }
 
+// Fermer la modal avec la touche ECHAP
+window.addEventListener('keydown', function(e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+        closeModal(e);
+    }
+})
+
+// Fermer la modal en cliquant sur le layer
+modal.addEventListener("click", function(e) {
+    closeModal(e);
+})
+
+// Empêcher la fermeture de la modal si le click est dans la fenêtre modal
+const stopPropagation = function(e) {
+    e.stopPropagation();
+}
+
+document.querySelector(".modalWrapper").addEventListener("click", function(e) {
+    stopPropagation(e);
+})
+
 closeButton.addEventListener("click", closeModal);
 closeButton2.addEventListener("click", closeModal);
 addPicture.addEventListener("click", goToStep2);

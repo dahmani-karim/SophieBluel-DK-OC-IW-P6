@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script defer type="module" src="./assets/js/script.js"></script>
+	<script type="module" src="./assets/js/script.js"></script>
 </head>
 <body>
 <header>
@@ -24,7 +24,7 @@
 	</nav>
 </header>
 <main>
-	<aside id="modal" class="modal" role="dialog" aria-labelledby="titleModal" style="display: none;">
+	<aside id="modal" class="modal" style="display: none;">
 		<div class="modalWrapper">
 			<div class="step1" style="display: flex;">
 				<img src="./assets/icons/close.png" alt="close" class="close">
@@ -41,7 +41,7 @@
 				<h3 class="titleModal">Ajout photo</h3>
 				<div class="addingBox">
 					<img src="./assets/icons/picture.png" alt="picture" id="newPic">
-					<img id="previewUpload" src="" alt="your image" style="display: none;">
+					<img id="previewUpload" src="./assets/icons/picture.png" alt="your image" style="display: none;">
 					<label for="submitPic" class="customInput">
 						+ Ajouter photo
 						<input type="file" id="submitPic" name="submitPic" title="cliquer pour sélectionner une image" accept=".jpg, .jpeg, .png">
@@ -52,8 +52,8 @@
 					<label for="workTitle">Titre</label>
 					<input type="text" name="workTitle" id="workTitle">
 					<label for="workCategory">Catégorie</label>
-					<select type="text" name="workCategory" id="workCategory">
-						<option id="option0"></option>
+					<select name="workCategory" id="workCategory">
+						<option label=""></option>
 					</select>
 					<div class="separate"></div>
 					<button id="uploadValidationForm">Valider</button>

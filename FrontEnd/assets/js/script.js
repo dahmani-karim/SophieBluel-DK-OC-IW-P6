@@ -86,7 +86,7 @@ async function buildGallery(id, zone) {
 filters.addEventListener("click", function (event) {
     const activeFilter = document.getElementById("selectedFilter");
     if (event.target.classList.contains("filter")) {
-        resetGallery();
+        resetGallery(gallery);
         activeFilter.removeAttribute("id");
         event.target.setAttribute("id","selectedFilter");
         buildGallery(Number(event.target.getAttribute("data-categoryId")));       
@@ -155,7 +155,7 @@ function createCatList() {
         const optionList = document.getElementById("workCategory");
         const option = document.createElement("option");
         option.setAttribute("value",categories[i].id);
-        option.innerText = categories[i].name;
+        option.setAttribute("label",categories[i].name);
         optionList.appendChild(option);
     }
 }

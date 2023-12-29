@@ -218,7 +218,7 @@ let newImgUpload = document.getElementById("submitPic");
 
 newImgUpload.onchange = evt => {
     const [file] = newImgUpload.files;
-    if (file && file.size>32000000) {
+    if (file && file.size<32000000) {
         previewUpload.src = URL.createObjectURL(file);
         document.getElementById("newPic").style.display = "none";
         document.querySelector(".customInput").style.display = "none";

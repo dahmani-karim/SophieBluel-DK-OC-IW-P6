@@ -201,7 +201,10 @@ a {
 .forgotPassword {
 	text-decoration: underline;
 }
-.loginErrorMessage {
+.loginErrorMessage, .uploadError {
+	padding: 3px;
+	margin: 2px;
+	font-weight: 700;
 	background-color: rgba(255, 0, 0, 0.692);
 }
 

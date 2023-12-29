@@ -218,12 +218,18 @@ let newImgUpload = document.getElementById("submitPic");
 
 newImgUpload.onchange = evt => {
     const [file] = newImgUpload.files;
-    if (file) {
+    if (file && file.size>32000000) {
         previewUpload.src = URL.createObjectURL(file);
         document.getElementById("newPic").style.display = "none";
         document.querySelector(".customInput").style.display = "none";
         document.getElementById("uploadInfo").style.display = "none";
         document.getElementById("previewUpload").style.display = "flex";
+    }
+    else {
+        const uploadError = document.createElement("span");
+        uploadError.classList.add("uploadError");
+        document.querySelector(".addingBox").appendChild(uploadError);
+        uploadError.innerHTML = "Fichier trop volumineux.";
     }
 }
 

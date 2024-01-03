@@ -232,10 +232,11 @@ if (token) {
         const [file] = newImgUpload.files;
         if (file && file.size<32000000) {
             previewUpload.src = URL.createObjectURL(file);
-            document.getElementById("newPic").style.display = "none";
-            document.querySelector(".customInput").style.display = "none";
-            document.getElementById("uploadInfo").style.display = "none";
-            document.getElementById("previewUpload").style.display = "flex";
+            document.getElementById("newPic").classList.add("hide");
+            document.querySelector(".customInput").classList.add("hide");
+            document.getElementById("uploadInfo").classList.add("hide");
+            document.getElementById("previewUpload").classList.remove("hide");
+            document.getElementById("previewUpload").classList.add("show");
         }
         else {
             const uploadError = document.createElement("span");
@@ -280,18 +281,22 @@ if (token) {
         previewUpload.src = "";
 
         // reset form
-        document.getElementById("newPic").removeAttribute("style");
-        document.querySelector(".customInput").removeAttribute("style");
-        document.getElementById("uploadInfo").removeAttribute("style");
-        document.getElementById("previewUpload").style.display ="none";
+        document.getElementById("newPic").classList.remove("hide");
+        document.querySelector(".customInput").classList.remove("hide");
+        document.getElementById("uploadInfo").classList.remove("hide");
+        document.getElementById("previewUpload").classList.remove("show");
+        document.getElementById("previewUpload").classList.add("hide");
         document.querySelector(".validPicture").setAttribute("id", "uploadValidationForm");
         document.querySelector(".validPicture").classList.remove("validPicture");
         document.getElementById("workTitle").value = "";
         document.getElementById("workCategory").value = "";
 
-        step2.style.display = "none";
-        step1.style.display = "flex";
-        modal.style.display = "none";
+        step2.classList.remove("show");
+        step2.classList.add("hide");
+        step1.classList.remove("hide");
+        step1.classList.add("show");
+        modal.classList.remove("show");
+        modal.classList.add("hide");
 
     };
 

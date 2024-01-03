@@ -24,16 +24,16 @@
 	</nav>
 </header>
 <main>
-	<aside id="modal" class="modal" style="display: none;">
+	<aside id="modal" class="modal hide">
 		<div class="modalWrapper">
-			<div class="step1" style="display: flex;">
+			<div class="step1 show">
 				<img src="./assets/icons/close.png" alt="fermer" class="close">
 				<h3 class="titleModal">Galerie photo</h3>
 				<div id="galleryModal" class="gallery galleryModal"></div>
 				<div class="separate"></div>
 				<button class="addPicture">Ajouter une photo</button>
 			</div>
-			<div class="step2" style="display: none;">
+			<div class="step2 hide">
 				<div class="modalNavigation">
 					<img src="./assets/icons/arrow-left.png" alt="retour" id="goBack">
 					<img src="./assets/icons/close.png" alt="fermer" class="close2">
@@ -41,7 +41,7 @@
 				<h3 class="titleModal">Ajout photo</h3>
 				<div class="addingBox">
 					<img src="./assets/icons/picture.png" alt="picture" id="newPic">
-					<img id="previewUpload" src="./assets/icons/picture.png" alt="your image" style="display: none;">
+					<img id="previewUpload" src="./assets/icons/picture.png" alt="your image" class="hide">
 					<label for="submitPic" class="customInput">
 						+ Ajouter photo
 						<input type="file" id="submitPic" name="submitPic" title="cliquer pour sélectionner une image" accept=".jpg, .jpeg, .png">

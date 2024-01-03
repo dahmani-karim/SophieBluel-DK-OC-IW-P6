@@ -7,6 +7,7 @@ const filters = document.querySelector(".filters");
 const gallery = document.getElementById("gallery");
 const galleryModal = document.getElementById("galleryModal");
 const loginButton = document.getElementById("loginButton");
+const loginLink = document.getElementById("loginLink");
 const token = window.sessionStorage.token;
 const modal = document.getElementById("modal");
 const closeButton = document.querySelector(".close");
@@ -122,8 +123,8 @@ function editModePage() {
     manageButton.addEventListener("click", openModal);
 
     // Modification du bouton de LOGIN en LOGOUT
-    loginButton.innerText ="logout";
-    loginButton.setAttribute("href","#");
+    loginLink.innerText ="logout";
+    loginLink.setAttribute("href","#");
 
     // Masquer les filtres
     filters.classList.add("visibilityHidden");
@@ -132,11 +133,11 @@ function editModePage() {
     loginButton.addEventListener("click", function() {
         window.sessionStorage.removeItem("token");
         filters.classList.remove("visibilityHidden");
-        loginButton.innerText ="login";
-        loginButton.setAttribute("href","./login.html");
+        loginLink.innerText ="login";
+        loginLink.setAttribute("href","./login.html");
         manageButton.classList.add("visibilityHidden");
         editIconBlack.classList.add("visibilityHidden");
-        editModeBan.style.display = "none";
+        editModeBan.classList.add("hide");
     });
 };
 
@@ -155,26 +156,37 @@ function createCatList() {
 function openModal(e) {
     e.preventDefault();
     buildGallery(0, "modal");
-    modal.style.display = "flex";
-}
-// Fermeture de la modal
-function closeModal(e) {
-    e.preventDefault();
-    step2.style.display = "none";
-    step1.style.display = "flex";
-    modal.style.display = "none";
+    modal.classList.remove("hide");
+    modal.classList.add("show");
 }
 // Navigation vers l'étape 2 de la modal
 function goToStep2(e) {
     e.preventDefault();
-    step1.style.display = "none";
-    step2.style.display = "flex";
+    step1.classList.remove("show");
+    step1.classList.add("hide");
+    step2.classList.remove("hide");
+    step2.classList.add("show");
 }
 // Navigation pour retour à l'étape 1 de la modal
 function backToStep1(e) {
     e.preventDefault();
-    step2.style.display = "none";
-    step1.style.display = "flex";
+    step2.classList.remove("show");
+    step2.classList.add("hide");
+    step1.classList.remove("hide");
+    step1.classList.add("show");
+}
+// Fermeture de la modal
+function closeModal(e) {
+    e.preventDefault();
+
+    step2.classList.remove("show");
+    step2.classList.add("hide");
+
+    step1.classList.remove("hide");
+    step1.classList.add("show");
+
+    modal.classList.remove("show");
+    modal.classList.add("hide");
 }
 
 /// UTILISATION DES FONCTIONS

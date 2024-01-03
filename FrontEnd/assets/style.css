@@ -213,8 +213,9 @@ a {
 /* FILTERS */
 .filters {
 	display: flex;
-	justify-content: space-around;
-	margin: 0 200px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 0 12em;
 }
 .filters button {
 	font-family: 'Syne';
@@ -224,7 +225,8 @@ a {
 	background-color: white;
 	height: 37px;
 	min-width: 100px;
-	margin : 2em auto ;
+	margin : 0 auto ;
+	margin-bottom: 2em;
 	padding: 0 15px;
 	border: solid 1px #1D6154;
 	border-radius: 60px ;

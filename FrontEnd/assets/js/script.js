@@ -276,7 +276,7 @@ if (token) {
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                //"Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
             body: formData,

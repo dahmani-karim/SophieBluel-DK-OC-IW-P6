@@ -163,16 +163,16 @@ li:hover {
 	display: flex;
 	flex-direction: column;
 }
-#contact input, #newWorkForm input, #newWorkForm select {
+#contact input, .newWorkForm input, .newWorkForm select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #newWorkForm label {
+#contact label, .newWorkForm label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea, #newWorkForm textarea, #newWorkForm select {
+#contact textarea, .newWorkForm textarea, .newWorkForm select {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -297,7 +297,7 @@ footer nav ul {
 	padding: 20px;
 	background-color: white;
 }
-.step1, .step2, .addingBox, #uploadForm, #newWorkForm {
+.step1, .step2, .addingBox, .newWorkForm {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -328,19 +328,18 @@ footer nav ul {
 .galleryModal figure {
 	width: 17%;
 }
-.close {
-	display: flex;
-	align-self: flex-end;
-	width: 12px;
-}
 
 /* MODAL NAVIGATION */
 .goBack {
 	display: flex;
 	align-self: flex-start;
 	width: 21px;
+	cursor: pointer;
 }
-.close:hover, .goBack:hover {
+.close {
+	display: flex;
+	align-self: flex-end;
+	width: 12px;
 	cursor: pointer;
 }
 

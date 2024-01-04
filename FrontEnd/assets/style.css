@@ -328,7 +328,7 @@ footer nav ul {
 .galleryModal figure {
 	width: 17%;
 }
-.close, .close2 {
+.close {
 	display: flex;
 	align-self: flex-end;
 	width: 12px;
@@ -340,7 +340,7 @@ footer nav ul {
 	align-self: flex-start;
 	width: 21px;
 }
-.close:hover, .close2:hover, .goBack:hover {
+.close:hover, .goBack:hover {
 	cursor: pointer;
 }
 

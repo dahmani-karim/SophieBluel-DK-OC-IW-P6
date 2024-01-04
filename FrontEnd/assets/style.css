@@ -90,6 +90,10 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+a {
+	text-decoration: none;
+	color: inherit;
+}
 nav ul {
 	display: flex;
 	align-items: center;
@@ -189,11 +193,6 @@ footer nav ul {
 	margin: 2em
 }
 
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
 /* LOGIN */
 .loginForm a {
 	text-align: center;
@@ -270,6 +269,9 @@ a {
 
 /* MODAL */
 .titleModal {
+	font-family: 'Work Sans';
+	font-weight: 400;
+	color: #000000;
 	font-size: 26px;
 	text-align: center;
 }
@@ -333,12 +335,12 @@ a {
 }
 
 /* MODAL NAVIGATION */
-#goBack {
+.goBack {
 	display: flex;
 	align-self: flex-start;
 	width: 21px;
 }
-.close:hover, .close2:hover, #goBack:hover {
+.close:hover, .close2:hover, .goBack:hover {
 	cursor: pointer;
 }
 

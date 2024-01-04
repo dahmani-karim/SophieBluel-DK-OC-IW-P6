@@ -13,7 +13,7 @@ const modal = document.getElementById("modal");
 const closeButton = document.querySelector(".close");
 const closeButton2 = document.querySelector(".close2");
 const addPicture = document.querySelector(".addPicture");
-const backArrow = document.getElementById("goBack");
+const backArrow = document.querySelector(".goBack");
 const step1 = document.querySelector(".step1");
 const step2 = document.querySelector(".step2");
 
@@ -64,6 +64,7 @@ function buildGallery(id, zone) {
                 const newIMG = document.createElement("img");
                 newWork.appendChild(newIMG);
                 newIMG.setAttribute("src",works[i].imageUrl);
+                newIMG.setAttribute("alt","photo");
                 newIMG.classList.add("photo");
                 if (zone === "modal") {
                     galleryModal.appendChild(newWork);
@@ -102,6 +103,7 @@ function editModePage() {
     editModeBan.classList.add("editBan");
     const editIcon = document.createElement("img");
     editIcon.setAttribute("src", "./assets/icons/penWhite.png");
+    editIcon.setAttribute("alt", "crayon blanc");
     const banText = document.createElement("p");
     banText.innerText = "Mode édition";
     editModeBan.appendChild(editIcon);
@@ -113,6 +115,7 @@ function editModePage() {
     const editIconBlack = document.createElement("img");
     editIconBlack.id = "blackPen";
     editIconBlack.setAttribute("src", "./assets/icons/penBlack.png");
+    editIconBlack.setAttribute("alt", "crayon noir");
     const manageButton = document.createElement("a");
     manageButton.classList.add("editButton");
     manageButton.setAttribute("href", "#modal");
@@ -273,7 +276,8 @@ if (token) {
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                "Authorization":`Bearer ${token}`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: formData,
         });

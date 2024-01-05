@@ -21,7 +21,7 @@ const step2 = document.querySelector(".step2")
 // Fetch catégories
 try {
     const responseCategories = await fetch("http://localhost:5678/api/categories")
-    if (responseCategories.status===500) throw new Error(`CODE ERREUR: ${responseCategories.status}`)
+    if (!responseCategories.ok) throw new Error(`CODE ERREUR: ${responseCategories.status}`)
     categories = await responseCategories.json()
     categoriesCounter = categories.length
 }
@@ -32,7 +32,7 @@ catch (error) {
 // Fetch travaux
 try {
     const responseWorks = await fetch("http://localhost:5678/api/works")
-    if (responseWorks.status===500) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
+    if (!responseWorks.ok) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
     works = await responseWorks.json()
     worksCounter = works.length
 }
@@ -286,21 +286,24 @@ if (token) {
         formData.append("title", title.value)
         formData.append("category", id)
 
-        const add = await fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
-            body: formData,
-        })
-        switch (add.status) {
-            case 500 : alert("Erreur du serveur")
-            break
-            case 401 : alert("Accès refusé")
-            break
-            case 400 : alert("Mauvaise requête")
-            break
-            default : alert("Nouvel élément ajouté !")
+        let add;
+        try {
+            add = await fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    //"Authorization": `Bearer ${token}`
+                },
+                body: formData,
+            })
+
+            if (!add.ok) throw new Error(`CODE ${add.status}`)
+
+            alert("Nouvel élément ajouté avec succès !")
+        }
+        catch (error) {
+            if (add.status===400) console.log(error+" Mauvaise Requête")
+            if (add.status===401) alert(error+" Accès Refusé")
+            if (add.status===500) console.log(error+" Serveur Indisponible")
         }
 
         previewUpload.src = ""
@@ -311,10 +314,8 @@ if (token) {
         document.getElementById("uploadInfo").classList.remove("hide")
         document.getElementById("previewUpload").classList.remove("show")
         document.getElementById("previewUpload").classList.add("hide")
-        document.querySelector(".validPicture").setAttribute("id", "uploadValidationForm")
-        document.querySelector(".validPicture").classList.remove("validPicture")
-        title.value = ""
-        categorieSelect.value = ""
+        document.getElementById("workTitle").value = ""
+        document.getElementById("workCategory").value = ""
 
         closeModal()
 
@@ -325,19 +326,22 @@ if (token) {
 
 // Supprimer du contenu
 async function deleteWork(id, token) {
-    const deleted = await fetch(`http://localhost:5678/api/works/${id}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization":`Bearer ${token}`
-        },
-    })
-    
-    switch (deleted.status) {
-        case 500 : alert("Erreur du serveur")
-        break
-        case 401 : alert("Accès refusé")
-        break
-        default : alert("Élément supprimé !")
+    let deleted;
+    try {
+        deleted = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization":`Bearer ${token}`
+            },
+        })
+
+        if (!deleted.ok) throw new Error(`CODE ${deleted.status}`)
+
+        alert("Élément supprimé avec succès !")
+    }
+    catch (error) {
+        if (deleted.status===401) console.log(error+" Accès Refusé")
+        if (deleted.status===500) console.log(error+" Serveur Indisponible")
     }
 }

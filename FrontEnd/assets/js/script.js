@@ -21,10 +21,17 @@ const step2 = document.querySelector(".step2");
 // Fetch catégories
 const responseCategories = await fetch("http://localhost:5678/api/categories");
 categories = await responseCategories.json();
+if (responseCategories.status===500){
+    console.log("Erreur du serveur");
+};
 categoriesCounter = categories.length;
+
 // Fetch travaux
 const responseWorks = await fetch("http://localhost:5678/api/works");
 works = await responseWorks.json();
+if (responseWorks.statut===500){
+    console.log("Erreur du serveur");
+};
 worksCounter = works.length;
 
 /// FONCTIONS PRINCIPALES
@@ -265,7 +272,7 @@ if (token) {
     };
 
     // Ajouter du contenu
-    function addWork() {
+    async function addWork() {
         const id = Number(document.getElementById("workCategory").value);
 
         const formData = new FormData();
@@ -273,7 +280,7 @@ if (token) {
         formData.append("title", document.getElementById("workTitle").value);
         formData.append("category", id);
 
-        fetch("http://localhost:5678/api/works", {
+        const add = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
                 //"Content-Type": "application/json",
@@ -281,6 +288,15 @@ if (token) {
             },
             body: formData,
         });
+        switch (add.status) {
+            case 500 : alert("Erreur du serveur");
+            break;
+            case 401 : alert("Accès refusé");
+            break;
+            case 400 : alert("Mauvaise requête");
+            break;
+            default : alert("Nouvel élément ajouté !");
+        };
 
         previewUpload.src = "";
 
@@ -308,12 +324,20 @@ if (token) {
 }
 
 // Supprimer du contenu
-function deleteWork(id, token) {
-    fetch(`http://localhost:5678/api/works/${id}`, {
+async function deleteWork(id, token) {
+    const deleted = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             "Authorization":`Bearer ${token}`
         },
     });
+    
+    switch (deleted.status) {
+        case 500 : alert("Erreur du serveur");
+        break;
+        case 401 : alert("Accès refusé");
+        break;
+        default : alert("Élément supprimé !");
+    };
 };

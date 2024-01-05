@@ -19,16 +19,26 @@ const step2 = document.querySelector(".step2")
 
 /// CONNEXION API
 // Fetch catégories
-const responseCategories = await fetch("http://localhost:5678/api/categories")
-if (responseCategories.status===500) console.log("Erreur du serveur")
-else categories = await responseCategories.json()
-categoriesCounter = categories.length
+try {
+    const responseCategories = await fetch("http://localhost:5678/api/categories")
+    if (responseCategories.status===500) throw new Error(`CODE ERREUR: ${responseCategories.status}`)
+    categories = await responseCategories.json()
+    categoriesCounter = categories.length
+}
+catch (error) {
+    console.log("Le serveur est injoignable, impossible de récupérer les catégories.", error)
+}
 
 // Fetch travaux
-const responseWorks = await fetch("http://localhost:5678/api/works")
-if (responseWorks.status===500) console.log("Erreur du serveur")
-else works = await responseWorks.json()
-worksCounter = works.length
+try {
+    const responseWorks = await fetch("http://localhost:5678/api/works")
+    if (responseWorks.status===500) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
+    works = await responseWorks.json()
+    worksCounter = works.length
+}
+catch (error) {
+    console.log("Le serveur est injoignable, impossible de récupérer les travaux.", error)
+}
 
 /// FONCTIONS PRINCIPALES
 // Reset gallerie
@@ -279,7 +289,6 @@ if (token) {
         const add = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                //"Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
             body: formData,

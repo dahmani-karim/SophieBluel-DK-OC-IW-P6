@@ -235,7 +235,7 @@ if (token) {
     function checkFields() {
         const isTitleOk = title.value?true:false
         const [file] = imgToUpload.files
-        let isPictureOk = file && file.size<32000000?true:false
+        let isPictureOk = file && file.size<32000000 && (file.type==="image/jpg" || file.type==="image/png")?true:false
         let isCategorieOk = categorieSelect.value>0?true:false
         if (isTitleOk && isCategorieOk && isPictureOk) submitButton.removeAttribute("disabled")
         else submitButton.setAttribute("disabled",true)
@@ -256,6 +256,7 @@ if (token) {
             document.getElementById("uploadInfo").classList.add("hide")
             document.getElementById("previewUpload").classList.remove("hide")
             document.getElementById("previewUpload").classList.add("show")
+            document.querySelector(".uploadError").classList.add("hide")
         }
         // Afficher un message d'erreur
         else {

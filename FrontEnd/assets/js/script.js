@@ -291,7 +291,7 @@ if (token) {
             add = await fetch("http://localhost:5678/api/works", {
                 method: "POST",
                 headers: {
-                    //"Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${token}`
                 },
                 body: formData,
             })

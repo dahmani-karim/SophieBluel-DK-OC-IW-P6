@@ -184,6 +184,7 @@ function goToStep2(e) {
 // Navigation pour retour à l'étape 1 de la modal
 function backToStep1(e) {
     e.preventDefault()
+    resetForm()
     step2.classList.remove("show")
     step2.classList.add("hide")
     step1.classList.remove("hide")
@@ -191,6 +192,7 @@ function backToStep1(e) {
 }
 // Fermeture de la modal
 function closeModal(e) {
+    resetForm()
     if(e) e.preventDefault()
     step2.classList.remove("show")
     step2.classList.add("hide")
@@ -198,6 +200,18 @@ function closeModal(e) {
     step1.classList.add("show")
     modal.classList.remove("show")
     modal.classList.add("hide")
+}
+
+// reset form
+function resetForm() {
+    previewUpload.src = ""
+    document.getElementById("newPic").classList.remove("hide")
+    document.querySelector(".customInput").classList.remove("hide")
+    document.getElementById("uploadInfo").classList.remove("hide")
+    document.getElementById("previewUpload").classList.remove("show")
+    document.getElementById("previewUpload").classList.add("hide")
+    document.getElementById("workTitle").value = ""
+    document.getElementById("workCategory").value = ""
 }
 
 /// UTILISATION DES FONCTIONS
@@ -303,17 +317,6 @@ if (token) {
             if (add.status===401) alert(error+" Accès Refusé")
             if (add.status===500) console.log(error+" Serveur Indisponible")
         }
-
-        previewUpload.src = ""
-
-        // reset form
-        document.getElementById("newPic").classList.remove("hide")
-        document.querySelector(".customInput").classList.remove("hide")
-        document.getElementById("uploadInfo").classList.remove("hide")
-        document.getElementById("previewUpload").classList.remove("show")
-        document.getElementById("previewUpload").classList.add("hide")
-        document.getElementById("workTitle").value = ""
-        document.getElementById("workCategory").value = ""
 
         closeModal()
         buildGallery(0, "home")

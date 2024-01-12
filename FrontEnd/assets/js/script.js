@@ -17,7 +17,6 @@ const backArrow = document.querySelector(".goBack")
 const step1 = document.querySelector(".step1")
 const step2 = document.querySelector(".step2")
 
-/// CONNEXION API
 // Fetch catégories
 try {
     const responseCategories = await fetch("http://localhost:5678/api/categories")
@@ -27,17 +26,6 @@ try {
 }
 catch (error) {
     console.log("Le serveur est injoignable, impossible de récupérer les catégories.", error)
-}
-
-// Fetch travaux
-try {
-    const responseWorks = await fetch("http://localhost:5678/api/works")
-    if (!responseWorks.ok) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
-    works = await responseWorks.json()
-    worksCounter = works.length
-}
-catch (error) {
-    console.log("Le serveur est injoignable, impossible de récupérer les travaux.", error)
 }
 
 /// FONCTIONS PRINCIPALES
@@ -67,7 +55,17 @@ function buildCategories() {
         }
 }
 // Récupération des travaux et construction de la gallerie
-function buildGallery(id, zone) {
+async function buildGallery(id, zone) {
+        // Fetch travaux
+        try {
+            const responseWorks = await fetch("http://localhost:5678/api/works")
+            if (!responseWorks.ok) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
+            works = await responseWorks.json()
+            worksCounter = works.length
+        }
+        catch (error) {
+            console.log("Le serveur est injoignable, impossible de récupérer les travaux.", error)
+        }
         // reset de la gallery
         zone === "home" ? resetGallery(gallery) : resetGallery(galleryModal)
         //ajout des projets
@@ -204,8 +202,8 @@ function closeModal(e) {
 
 /// UTILISATION DES FONCTIONS
 // Initialisation
-buildCategories();
-buildGallery(0, "home");
+buildCategories()
+buildGallery(0, "home")
 
 // Activation du mode édition
 if (token) {
@@ -318,6 +316,7 @@ if (token) {
         document.getElementById("workCategory").value = ""
 
         closeModal()
+        buildGallery(0, "home")
 
     }
 
@@ -344,4 +343,5 @@ async function deleteWork(id, token) {
         if (deleted.status===401) console.log(error+" Accès Refusé")
         if (deleted.status===500) console.log(error+" Serveur Indisponible")
     }
+    buildGallery(0, "home")
 }

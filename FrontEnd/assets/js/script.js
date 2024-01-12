@@ -35,67 +35,67 @@ function resetGallery(zone) {
 }
 // Récupération des noms des catégories et construction des boutons de filtres
 function buildCategories() {
-        // ajout du bouton TOUS
-        const allCatFilter = document.createElement("button")
-        allCatFilter.setAttribute("type","button")
-        allCatFilter.setAttribute("id", "selectedFilter")
-        allCatFilter.setAttribute("data-categoryId",0)
-        allCatFilter.classList.add("filter")
-        filters.appendChild(allCatFilter)
-        allCatFilter.innerText = "Tous"
+    // ajout du bouton TOUS
+    const allCatFilter = document.createElement("button")
+    allCatFilter.setAttribute("type","button")
+    allCatFilter.setAttribute("id", "selectedFilter")
+    allCatFilter.setAttribute("data-categoryId",0)
+    allCatFilter.classList.add("filter")
+    filters.appendChild(allCatFilter)
+    allCatFilter.innerText = "Tous"
 
-        // ajout des autres boutons de filtre en fonction des catégories existantes dans l'API
-        for (let i = 0; i < categoriesCounter; i++) {
-            const newFilter = document.createElement("button")
-            newFilter.setAttribute("type","button")
-            newFilter.setAttribute("data-categoryId",categories[i].id)
-            newFilter.classList.add("filter")
-            filters.appendChild(newFilter)
-            newFilter.innerText = categories[i].name
-        }
+    // ajout des autres boutons de filtre en fonction des catégories existantes dans l'API
+    for (let i = 0; i < categoriesCounter; i++) {
+        const newFilter = document.createElement("button")
+        newFilter.setAttribute("type","button")
+        newFilter.setAttribute("data-categoryId",categories[i].id)
+        newFilter.classList.add("filter")
+        filters.appendChild(newFilter)
+        newFilter.innerText = categories[i].name
+    }
 }
 // Récupération des travaux et construction de la gallerie
 async function buildGallery(id, zone) {
-        // Fetch travaux
-        try {
-            const responseWorks = await fetch("http://localhost:5678/api/works")
-            if (!responseWorks.ok) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
-            works = await responseWorks.json()
-            worksCounter = works.length
-        }
-        catch (error) {
-            console.log("Le serveur est injoignable, impossible de récupérer les travaux.", error)
-        }
-        // reset de la gallery
-        zone === "home" ? resetGallery(gallery) : resetGallery(galleryModal)
-        //ajout des projets
-        for (let i = 0; i < worksCounter; i++) {
-            if( works[i].categoryId === id || id === 0) {
-                const newWork = document.createElement("figure")
-                const newIMG = document.createElement("img")
-                newWork.appendChild(newIMG)
-                newIMG.setAttribute("src",works[i].imageUrl)
-                newIMG.setAttribute("alt","photo")
-                newIMG.classList.add("photo")
-                if (zone === "modal") {
-                    galleryModal.appendChild(newWork)
-                    const removeButton = document.createElement("img")
-                    removeButton.classList.add("trash")
-                    removeButton.id = "trash"+[i+1]
-                    removeButton.setAttribute("src", "./assets/icons/trash.png")
-                    newWork.appendChild(removeButton)
-                    removeButton.addEventListener("click", function() {
-                        deleteWork(works[i].id, token)
-                    });
-                }
-                else {
-                    gallery.appendChild(newWork)
-                    const newFigCaption = document.createElement("figcaption")
-                    newWork.appendChild(newFigCaption)
-                    newFigCaption.innerText = works[i].title
-                }
+    // Fetch travaux
+    try {
+        const responseWorks = await fetch("http://localhost:5678/api/works")
+        if (!responseWorks.ok) throw new Error(`CODE ERREUR: ${responseWorks.status}`)
+        works = await responseWorks.json()
+        worksCounter = works.length
+    }
+    catch (error) {
+        console.log("Le serveur est injoignable, impossible de récupérer les travaux.", error)
+    }
+    // reset de la gallery
+    zone === "home" ? resetGallery(gallery) : resetGallery(galleryModal)
+    //ajout des projets
+    for (let i = 0; i < worksCounter; i++) {
+        if( works[i].categoryId === id || id === 0) {
+            const newWork = document.createElement("figure")
+            const newIMG = document.createElement("img")
+            newWork.appendChild(newIMG)
+            newIMG.setAttribute("src",works[i].imageUrl)
+            newIMG.setAttribute("alt","photo")
+            newIMG.classList.add("photo")
+            if (zone === "modal") {
+                galleryModal.appendChild(newWork)
+                const removeButton = document.createElement("img")
+                removeButton.classList.add("trash")
+                removeButton.id = "trash"+[i+1]
+                removeButton.setAttribute("src", "./assets/icons/trash.png")
+                newWork.appendChild(removeButton)
+                removeButton.addEventListener("click", function() {
+                    deleteWork(works[i].id, token)
+                });
+            }
+            else {
+                gallery.appendChild(newWork)
+                const newFigCaption = document.createElement("figcaption")
+                newWork.appendChild(newFigCaption)
+                newFigCaption.innerText = works[i].title
             }
         }
+    }
 }
 // Fonction de filtration de la gallerie
 filters.addEventListener("click", function (event) {
@@ -278,7 +278,7 @@ if (token) {
             document.getElementById("uploadInfo").classList.add("hide")
             document.getElementById("previewUpload").classList.remove("hide")
             document.getElementById("previewUpload").classList.add("show")
-            document.querySelector(".uploadError").classList.add("hide")
+            if (document.querySelector(".uploadError")) document.querySelector(".uploadError").classList.add("hide")
         }
         // Afficher un message d'erreur
         else {

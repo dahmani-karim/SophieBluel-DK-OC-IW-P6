@@ -278,14 +278,20 @@ if (token) {
             document.getElementById("uploadInfo").classList.add("hide")
             document.getElementById("previewUpload").classList.remove("hide")
             document.getElementById("previewUpload").classList.add("show")
-            if (document.querySelector(".uploadError")) document.querySelector(".uploadError").classList.add("hide")
+            if (document.querySelector(".uploadError")) {
+                document.querySelector(".uploadError").classList.remove("show")
+                document.querySelector(".uploadError").classList.add("hide")
+            }
         }
         // Afficher un message d'erreur
         else {
-            const uploadError = document.createElement("span")
-            uploadError.classList.add("uploadError")
-            document.querySelector(".addingBox").appendChild(uploadError)
-            uploadError.innerHTML = "Format incorrect ou trop lourd."
+            if (!document.querySelector(".uploadError")) {
+                const uploadError = document.createElement("span")
+                uploadError.classList.add("uploadError")
+                document.querySelector(".addingBox").appendChild(uploadError)
+                uploadError.innerHTML = "Format incorrect ou trop lourd."
+                document.querySelector(".uploadError").classList.add("show")
+            }
         }
     };
 
